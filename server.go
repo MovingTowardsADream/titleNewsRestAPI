@@ -1,4 +1,4 @@
-package titleNews
+package news
 
 import (
 	"context"

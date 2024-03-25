@@ -1,4 +1,4 @@
-package titleNews
+package news
 
 type User struct {
 	Id       int    `json:"id"`
