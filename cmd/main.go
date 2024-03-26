@@ -2,7 +2,7 @@ package main
 
 import (
 	_ "github.com/lib/pq"
-	"log"
+	"github.com/sirupsen/logrus"
 	news "titleNewsRestApi"
 	"titleNewsRestApi/pkg/handler"
 	"titleNewsRestApi/pkg/repository"
@@ -10,6 +10,7 @@ import (
 )
 
 func main() {
+	logrus.SetFormatter(new(logrus.JSONFormatter))
 
 	db, err := repository.NewPostgresDB(repository.ConfigDB{
 		Host:     "localhost",
@@ -20,7 +21,7 @@ func main() {
 		SSLMode:  "disable",
 	})
 	if err != nil {
-		log.Fatalf("Failed initialization database")
+		logrus.Fatalf("Failed initialization database")
 	}
 
 	repos := repository.NewRepository(db)
@@ -29,6 +30,6 @@ func main() {
 
 	server := new(news.Server)
 	if err := server.Run("8000", handlers.InitHandler()); err != nil {
-		log.Fatal("Error server")
+		logrus.Fatal("Error server")
 	}
 }

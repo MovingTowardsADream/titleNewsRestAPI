@@ -1,8 +1,12 @@
 package service
 
-import "titleNewsRestApi/pkg/repository"
+import (
+	news "titleNewsRestApi"
+	"titleNewsRestApi/pkg/repository"
+)
 
 type Authorization interface {
+	CreateUser(user news.User) (int, error)
 }
 
 type TitleList interface {
@@ -14,5 +18,7 @@ type Service struct {
 }
 
 func NewService(repos *repository.Repository) *Service {
-	return &Service{}
+	return &Service{
+		Authorization: NewAuthServices(repos.Authorization),
+	}
 }
