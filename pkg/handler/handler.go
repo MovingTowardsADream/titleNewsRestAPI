@@ -20,7 +20,7 @@ func (h *Handler) InitHandler() *gin.Engine {
 		auth.POST("sign-up", h.signUp)
 		auth.POST("sign-in", h.signIn)
 	}
-	title := router.Group("/title")
+	title := router.Group("/title", h.userIdentity)
 	{
 		title.POST("/", h.createTitle)
 		title.GET("/", h.getAllTitle)
