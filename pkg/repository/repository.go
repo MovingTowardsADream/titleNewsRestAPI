@@ -7,6 +7,7 @@ import (
 
 type Authorization interface {
 	CreateUser(user news.User) (int, error)
+	GetUser(username, password string) (news.User, error)
 }
 
 type TitleList interface {
