@@ -23,3 +23,27 @@ func (r *TitleListPostgres) Create(userId int, list news.Title) (int, error) {
 	}
 	return id, nil
 }
+
+func (r *TitleListPostgres) GetAll(userId int) ([]news.Title, error) {
+	var list []news.Title
+	query := fmt.Sprintf("SELECT * FROM %s WHERE user_id=$1", titleTable)
+	err := r.db.Select(&list, query, userId)
+
+	return list, err
+}
+
+func (r *TitleListPostgres) GetById(userId, listId int) (news.Title, error) {
+	var list news.Title
+	query := fmt.Sprintf("SELECT * FROM %s WHERE id=$1 AND user_id=$2", titleTable)
+	err := r.db.Get(&list, query, listId, userId)
+
+	return list, err
+}
+
+func (r *TitleListPostgres) Delete(userId, listId int) error {
+	query := fmt.Sprintf("DELETE FROM %s WHERE id=$1 AND user_id=$2", titleTable)
+
+	_, err := r.db.Exec(query, listId, userId)
+	fmt.Println(err)
+	return err
+}

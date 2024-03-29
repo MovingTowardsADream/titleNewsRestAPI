@@ -12,6 +12,9 @@ type Authorization interface {
 
 type TitleList interface {
 	Create(userId int, list news.Title) (int, error)
+	GetAll(userId int) ([]news.Title, error)
+	GetById(userId, listId int) (news.Title, error)
+	Delete(userId, listId int) error
 }
 
 type Repository struct {

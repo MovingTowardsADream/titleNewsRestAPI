@@ -25,7 +25,7 @@ func (h *Handler) InitHandler() *gin.Engine {
 		title.POST("/", h.createTitle)
 		title.GET("/", h.getAllTitle)
 		title.GET(":id", h.getTitleById)
-		title.PUT(":id", h.updateTitle)
+		//title.PUT(":id", h.updateTitle)
 		title.DELETE("/:id", h.deleteTitle)
 	}
 
