@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  titlenewsrestapi:
+  app:
     build: ./
-    command: ./titlenewsrestapi
+    command: ./app
     ports:
       - 8000:8000
     depends_on:
@@ -13,8 +13,10 @@ services:
 
   db:
     restart: always
-    image: postgres:latest
+    image: postgres
     volumes:
       - ./.database/postgres/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=qwerty
     ports:
       - 5432:5432
