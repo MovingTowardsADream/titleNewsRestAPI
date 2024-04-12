@@ -3,7 +3,8 @@ version: '3.8'
 services:
   app:
     build: ./
-    command: ./app
+    command:
+     - ./app
     ports:
       - 8000:8000
     depends_on:
