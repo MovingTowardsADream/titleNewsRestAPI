@@ -44,6 +44,6 @@ func (r *TitleListPostgres) Delete(userId, listId int) error {
 	query := fmt.Sprintf("DELETE FROM %s WHERE id=$1 AND user_id=$2", titleTable)
 
 	_, err := r.db.Exec(query, listId, userId)
-	fmt.Println(err)
+
 	return err
 }
